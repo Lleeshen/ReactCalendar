@@ -1,5 +1,6 @@
 import styled from 'styled-components';
+import Row from 'react-bootstrap'
 
 export default styled.div`
-  margin: 0 0 0 0;
+  margin: 15px 15px 15px 15px;
 `;
