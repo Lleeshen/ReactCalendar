@@ -9,10 +9,20 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
-export default function HomePage() {
-  return (
-    <h1>
-      <FormattedMessage {...messages.header} />
-    </h1>
-  );
+import Header from 'components/Header';
+
+class HomePage extends React.Component {
+  constructor() {
+    super();
+    this.state = {date: new Date()};
+  }
+  render(){
+    return (
+      <div>
+        <Header date={this.state.date}/>
+      </div>
+    );
+  }
 }
+
+export default HomePage;
