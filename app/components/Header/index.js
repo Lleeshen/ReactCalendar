@@ -1,11 +1,24 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button, Modal } from 'react-bootstrap';
 import Elt from './eltStyle';
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      createEvent: false,
+    };
+    this.newEvent = this.newEvent.bind(this);
+    this.cancelEvent = this.cancelEvent.bind(this);
+  }
+
+  newEvent() {
+    this.setState({createEvent: true});
+  }
+
+  cancelEvent() {
+    this.setState({createEvent: false});
   }
 
   getMonthName(month) {
@@ -28,13 +41,21 @@ class Header extends React.Component {
 
   render () {
     return (
-      <Row>
-        <Col> <Elt> <h2> Calendar </h2> </Elt> </Col>
-        <Col> <Elt> <Button onClick={this.props.toToday} variant="outline-secondary">Today</Button> </Elt> </Col>
-        <Col> <Elt> <Button onClick={this.props.moveBack} variant="primary">Previous Day</Button> </Elt> </Col>
-        <Col> <Elt> <Button onClick={this.props.moveForward} variant="primary">Next Day</Button> </Elt> </Col>
-        <Col lg={7}> <Elt> <h3> {this.getMonthName(this.props.date.getMonth())} {this.props.date.getDate()}, {this.props.date.getFullYear() } </h3> </Elt> </Col>
-      </Row>
+      <div>
+        <Row>
+          <Col> <Elt> <h2> Calendar </h2> </Elt> </Col>
+          <Col> <Elt> <Button onClick={this.newEvent} variant="primary"> Add Event </Button> </Elt> </Col>
+          <Col> <Elt> <Button onClick={this.props.toToday} variant="outline-secondary">Today</Button> </Elt> </Col>
+          <Col> <Elt> <Button onClick={this.props.moveBack} variant="secondary">Previous Day</Button> </Elt> </Col>
+          <Col> <Elt> <Button onClick={this.props.moveForward} variant="secondary">Next Day</Button> </Elt> </Col>
+          <Col lg={5}> <Elt> <h3> {this.getMonthName(this.props.date.getMonth())} {this.props.date.getDate()}, {this.props.date.getFullYear() } </h3> </Elt> </Col>
+        </Row>
+        <Modal show={this.state.createEvent} onHide={this.cancelEvent}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+        </Modal>
+      </div>
     );
   }
 }
