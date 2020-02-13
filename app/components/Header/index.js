@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Row, Col, Button, Modal } from 'react-bootstrap';
+import { Row, Col, Button, Modal, Form } from 'react-bootstrap';
 import Elt from './eltStyle';
 
 class Header extends React.Component {
@@ -52,7 +52,32 @@ class Header extends React.Component {
         </Row>
         <Modal show={this.state.createEvent} onHide={this.cancelEvent}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Create Event</Modal.Title>
+            <Modal.Body>
+              <Form>
+                <Form.Group controlId="EventTitle">
+                  <Form.Label>Event Title</Form.Label>
+                  <Form.Control type="text" placeholder="Title" />
+                </Form.Group>
+                <Form.Group controlId="EventDescription">
+                  <Form.Label>Event Description</Form.Label>
+                  <Form.Control type="text" placeholder="Description" />
+                </Form.Group>
+                <Form.Group controlId="EventStartTime">
+                  <Form.Label>Start time</Form.Label>
+                  <Form.Control type="date" />
+                  <br />
+                  <Form.Control type="time"/>
+                </Form.Group>
+                <Form.Group controlId="EventEndTime">
+                  <Form.Label>End time</Form.Label>
+                  <Form.Control type="date" />
+                  <br />
+                  <Form.Control type="time"/>
+                </Form.Group>
+                <Button type="submit" variant="outline-primary">Create Event</Button>
+              </Form>
+            </Modal.Body>
           </Modal.Header>
         </Modal>
       </div>
