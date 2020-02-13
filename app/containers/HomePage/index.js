@@ -14,7 +14,10 @@ import Header from 'components/Header';
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {date: new Date()};
+    this.state = {
+      date: new Date(),
+      events: [],
+    };
     this.toToday = this.toToday.bind(this);
     this.moveBack=this.moveBack.bind(this);
     this.moveForward=this.moveForward.bind(this);
