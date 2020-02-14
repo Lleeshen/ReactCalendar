@@ -8,19 +8,11 @@ class Header extends React.Component {
     super(props);
     this.state = {
       createEvent: false,
-      eventObject: {
-        title: null,
-        desc: null,
-        startDate: null,
-        startTime: null,
-        endDate: null,
-        endTime: null,
-      },
     };
     this.newEvent = this.newEvent.bind(this);
     this.cancelEvent = this.cancelEvent.bind(this);
-    this.createEvent = this.createEvent.bind(this);
     this.changeEvent = this.changeEvent.bind(this);
+    this.addEvent = this.addEvent.bind(this);
   }
 
   newEvent() {
@@ -32,25 +24,13 @@ class Header extends React.Component {
   }
 
   changeEvent(e) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    this.setState({
-      eventObject: {
-        title: this.state.eventObject.title,
-        desc: this.state.eventObject.desc,
-        startDate: this.state.eventObject.startDate,
-        startTime: this.state.eventObject.startTime,
-        endDate: this.state.eventObject.endDate,
-        endTime: this.state.eventObject.endTime,
-        [name]: value,
-      }
-    })
+    this.props.modifyEvent(e)
   }
 
-  createEvent(e) {
+  addEvent(e) {
     e.preventDefault();
-    console.log(this.state.eventObject);
+    this.props.createEvent();
+    this.cancelEvent();
   }
 
   getMonthName(month) {
@@ -86,7 +66,7 @@ class Header extends React.Component {
           <Modal.Header closeButton>
             <Modal.Title>Create Event</Modal.Title>
             <Modal.Body>
-              <Form onSubmit={this.createEvent}>
+              <Form onSubmit={this.addEvent}>
                 <Form.Group controlId="EventTitle">
                   <Form.Label>Event Title</Form.Label>
                   <Form.Control type="text" name="title" placeholder="Title" onChange={this.changeEvent}/>
