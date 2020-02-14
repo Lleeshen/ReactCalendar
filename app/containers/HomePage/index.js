@@ -28,12 +28,12 @@ class HomePage extends React.Component {
   }
 
   moveBack() {
-    var today = this.state.date;
+    const today = this.state.date;
     this.setState({date: new Date(today.getTime()-86400000)});
   }
 
   moveForward() {
-    var today = this.state.date;
+    const today = this.state.date;
     this.setState({date: new Date(today.getTime()+86400000)});
   }
 
