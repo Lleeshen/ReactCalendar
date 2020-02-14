@@ -16,12 +16,6 @@ class Header extends React.Component {
         endDate: null,
         endTime: null,
       },
-      title: null,
-      desc: null,
-      startDate: null,
-      startTime: null,
-      endDate: null,
-      endTime: null,
     };
     this.newEvent = this.newEvent.bind(this);
     this.cancelEvent = this.cancelEvent.bind(this);
@@ -42,16 +36,14 @@ class Header extends React.Component {
     const value = target.value;
     const name = target.name;
     this.setState({
-      [name]: value,
-    });
-    this.setState({
       eventObject: {
-        title: this.state.title,
-        desc: this.state.desc,
-        startDate: this.state.startDate,
-        startTime: this.state.startTime,
-        endDate: this.state.endDate,
-        endTime: this.state.endTime,
+        title: this.state.eventObject.title,
+        desc: this.state.eventObject.desc,
+        startDate: this.state.eventObject.startDate,
+        startTime: this.state.eventObject.startTime,
+        endDate: this.state.eventObject.endDate,
+        endTime: this.state.eventObject.endTime,
+        [name]: value,
       }
     })
   }
