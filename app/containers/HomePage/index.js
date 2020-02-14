@@ -10,6 +10,7 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
 import Header from 'components/Header';
+import Calendar from 'components/Calendar';
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -88,6 +89,7 @@ class HomePage extends React.Component {
       <div>
         <Header date={this.state.date} toToday={this.toToday} moveBack={this.moveBack} moveForward={this.moveForward}
            modifyEvent={this.modifyEvent} createEvent={this.createEvent}/>
+        <Calendar events={this.state.events}/>
       </div>
     );
   }
