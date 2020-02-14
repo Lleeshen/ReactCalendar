@@ -8,9 +8,25 @@ class Header extends React.Component {
     super(props);
     this.state = {
       createEvent: false,
+      eventObject: {
+        title: null,
+        desc: null,
+        startDate: null,
+        startTime: null,
+        endDate: null,
+        endTime: null,
+      },
+      title: null,
+      desc: null,
+      startDate: null,
+      startTime: null,
+      endDate: null,
+      endTime: null,
     };
     this.newEvent = this.newEvent.bind(this);
     this.cancelEvent = this.cancelEvent.bind(this);
+    this.createEvent = this.createEvent.bind(this);
+    this.changeEvent = this.changeEvent.bind(this);
   }
 
   newEvent() {
@@ -19,6 +35,30 @@ class Header extends React.Component {
 
   cancelEvent() {
     this.setState({createEvent: false});
+  }
+
+  changeEvent(e) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value,
+    });
+    this.setState({
+      eventObject: {
+        title: this.state.title,
+        desc: this.state.desc,
+        startDate: this.state.startDate,
+        startTime: this.state.startTime,
+        endDate: this.state.endDate,
+        endTime: this.state.endTime,
+      }
+    })
+  }
+
+  createEvent(e) {
+    e.preventDefault();
+    console.log(this.state.eventObject);
   }
 
   getMonthName(month) {
@@ -54,26 +94,26 @@ class Header extends React.Component {
           <Modal.Header closeButton>
             <Modal.Title>Create Event</Modal.Title>
             <Modal.Body>
-              <Form>
+              <Form onSubmit={this.createEvent}>
                 <Form.Group controlId="EventTitle">
                   <Form.Label>Event Title</Form.Label>
-                  <Form.Control type="text" placeholder="Title" />
+                  <Form.Control type="text" name="title" placeholder="Title" onChange={this.changeEvent}/>
                 </Form.Group>
                 <Form.Group controlId="EventDescription">
                   <Form.Label>Event Description</Form.Label>
-                  <Form.Control type="text" placeholder="Description" />
+                  <Form.Control type="text" name="desc" placeholder="Description" onChange={this.changeEvent}/>
                 </Form.Group>
                 <Form.Group controlId="EventStartTime">
                   <Form.Label>Start time</Form.Label>
-                  <Form.Control type="date" />
+                  <Form.Control type="date" name="startDate" onChange={this.changeEvent}/>
                   <br />
-                  <Form.Control type="time"/>
+                  <Form.Control type="time" name="startTime" onChange={this.changeEvent}/>
                 </Form.Group>
                 <Form.Group controlId="EventEndTime">
                   <Form.Label>End time</Form.Label>
-                  <Form.Control type="date" />
+                  <Form.Control type="date" name="endDate" onChange={this.changeEvent}/>
                   <br />
-                  <Form.Control type="time"/>
+                  <Form.Control type="time" name="endTime" onChange={this.changeEvent}/>
                 </Form.Group>
                 <Button type="submit" variant="outline-primary">Create Event</Button>
               </Form>
