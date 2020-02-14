@@ -65,7 +65,7 @@ class HomePage extends React.Component {
     })
   }
 
-  createEvent() {
+  createEvent(e) {
     this.setState(function(state){
       const newEvents = this.state.events.concat(this.state.eventObject);
       console.log(this.state.eventObject);
@@ -89,7 +89,7 @@ class HomePage extends React.Component {
       <div>
         <Header date={this.state.date} toToday={this.toToday} moveBack={this.moveBack} moveForward={this.moveForward}
            modifyEvent={this.modifyEvent} createEvent={this.createEvent}/>
-        <Calendar events={this.state.events}/>
+        <Calendar events={this.state.events} newEvent={this.state.eventObject} modifyEvent={this.modifyEvent}/>
       </div>
     );
   }
