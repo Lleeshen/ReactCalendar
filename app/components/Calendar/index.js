@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroup, Modal, Form, Button } from 'react-bootstrap'
+import { ListGroup, Modal, Form, Button, Row, Col } from 'react-bootstrap'
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -31,11 +31,15 @@ class Calendar extends React.Component {
   }
 
   render() {
-    const items = this.props.events.map((events,index) =>
-       <ListGroup.Item action onClick={this.editEvent} as="li" key={index}>
-         <h2>{events.title}</h2>
-         <h3>{events.desc}</h3>
-         <p> {events.startDate} {events.startTime} to {events.endDate} {events.endTime} </p>
+    const items = this.props.events.map((events) =>
+       <ListGroup.Item action as="li" key={events.id}>
+         <Row>
+           <Col> <h2>{events.title}</h2> </Col>
+           <Col> <h3>{events.desc}</h3> </Col>
+           <Col lg="4"> <h3> {events.startDate} {events.startTime} to {events.endDate} {events.endTime} </h3> </Col>
+           <Col> <Button onClick={this.editEvent} variant="outline-secondary"> Edit Event</Button> </Col>
+           <Col> <Button variant="outline-secondary"> Delete Event </Button> </Col>
+         </Row>
       </ListGroup.Item>
     );
     return (
