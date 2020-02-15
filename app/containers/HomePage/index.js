@@ -36,6 +36,7 @@ class HomePage extends React.Component {
     this.createEvent=this.createEvent.bind(this);
     this.initEvent=this.initEvent.bind(this);
     this.cancelEdit=this.cancelEdit.bind(this);
+    this.confirmChange=this.confirmChange.bind(this);
   }
 
   toToday() {
@@ -104,7 +105,7 @@ class HomePage extends React.Component {
       return {
         events: newEvents,
         eventObject: {
-          id: this.state.eventObject.id,
+          id: null,
           title: "",
           desc: "",
           startDate: "",
@@ -116,10 +117,9 @@ class HomePage extends React.Component {
     });
   }
 
-  initEvent(event) {
+  initEvent(e) {
     const value = event.target.value;
     const curEvent = this.state.events.filter(eventObject => eventObject.id == value)[0];
-    console.log(curEvent);
     this.setState(function(state){
       const toModify = {
         id: value,
@@ -142,13 +142,32 @@ class HomePage extends React.Component {
     this.setState({editEvent: false});
   }
 
+  confirmChange(e) {
+    e.preventDefault();
+    const updatedEvent = this.state.eventObject;
+    this.setState(function(state){
+      const updatedEvents = this.state.events.map((eventObject) => {
+        if (eventObject.id == this.state.eventObject.id) {
+          return updatedEvent;
+        } else {
+          return eventObject;
+        }
+      });
+      console.log(updatedEvents);
+      return {
+        events: updatedEvents,
+        editEvent: false,
+      };
+    });
+  }
+
   render(){
     return (
       <div>
         <Header date={this.state.date} toToday={this.toToday} moveBack={this.moveBack} moveForward={this.moveForward}
            modifyEvent={this.modifyEvent} createEvent={this.createEvent}/>
         <Calendar events={this.state.events} editEvent={this.state.editEvent} newEvent={this.state.eventObject}
-          modifyEvent={this.modifyEvent} initEvent={this.initEvent} cancelEdit={this.cancelEdit}/>
+           modifyEvent={this.modifyEvent} initEvent={this.initEvent} cancelEdit={this.cancelEdit} confirmChange={this.confirmChange}/>
       </div>
     );
   }

@@ -4,13 +4,7 @@ import { ListGroup, Modal, Form, Button, Row, Col } from 'react-bootstrap'
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
-    this.confirmChange=this.confirmChange.bind(this);
     this.changeEvent=this.changeEvent.bind(this);
-  }
-
-  confirmChange(e) {
-    e.preventDefault();
-    console.log(event);
   }
 
   changeEvent(e) {
@@ -38,7 +32,7 @@ class Calendar extends React.Component {
           <Modal.Header closeButton>
             <Modal.Title>Edit Event</Modal.Title>
             <Modal.Body>
-              <Form onSubmit={this.confirmChange}>
+              <Form onSubmit={this.props.confirmChange}>
                 <Form.Group controlId="EventTitle">
                   <Form.Label>Event Title</Form.Label>
                   <Form.Control type="text" name="title" defaultValue={this.props.newEvent.title} onChange={this.changeEvent}/>
