@@ -99,12 +99,12 @@ class HomePage extends React.Component {
       return {
         events: newEvents,
         eventObject: {
-          title: null,
-          desc: null,
-          startDate: null,
-          startTime: null,
-          endDate: null,
-          endTime: null,
+          title: "",
+          desc: "",
+          startDate: "",
+          startTime: "",
+          endDate: "",
+          endTime: "",
         },
       }
     });
