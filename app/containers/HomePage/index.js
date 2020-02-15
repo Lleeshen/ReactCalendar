@@ -67,8 +67,36 @@ class HomePage extends React.Component {
 
   createEvent(e) {
     this.setState(function(state){
-      const newEvents = this.state.events.concat(this.state.eventObject);
-      console.log(this.state.eventObject);
+      let hashSize = 10000;
+      var newKey = Math.floor(Math.random()*hashSize);
+      var usedKeys = this.state.events.map((eventObject)=>eventObject.id);
+      var unique = 1;
+      while(unique == 1) {
+        unique = 0;
+        var key;
+        for(key of usedKeys) {
+          if(newKey == key) {
+            unique = 1;
+          }
+        }
+        if(unique == 1) {
+          newKey = Math.floor(Math.random()*hashSize);
+        } else {
+          break;
+        }
+      }
+      console.log(newKey);
+      console.log(usedKeys);
+      const newEvent = {
+        id: newKey,
+        title: this.state.eventObject.title,
+        desc: this.state.eventObject.desc,
+        startDate: this.state.eventObject.startDate,
+        startTime: this.state.eventObject.startTime,
+        endDate: this.state.eventObject.endDate,
+        endTime: this.state.eventObject.endTime,
+      }
+      const newEvents = this.state.events.concat(newEvent);
       console.log(newEvents);
       return {
         events: newEvents,
