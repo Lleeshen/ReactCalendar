@@ -85,8 +85,6 @@ class HomePage extends React.Component {
           break;
         }
       }
-      console.log(newKey);
-      console.log(usedKeys);
       const newEvent = {
         id: newKey,
         title: this.state.eventObject.title,

@@ -14,7 +14,9 @@ class Calendar extends React.Component {
   }
 
   editEvent() {
-    this.setState({editEvent: true});
+    this.setState({
+      editEvent: true,
+    });
   }
 
   cancelEdit() {
@@ -23,7 +25,7 @@ class Calendar extends React.Component {
 
   confirmChange(e) {
     e.preventDefault();
-    console.log(this.props.newEvent);
+    console.log(event);
   }
 
   changeEvent(e) {
@@ -37,8 +39,8 @@ class Calendar extends React.Component {
            <Col> <h2>{events.title}</h2> </Col>
            <Col> <h3>{events.desc}</h3> </Col>
            <Col lg="4"> <h3> {events.startDate} {events.startTime} to {events.endDate} {events.endTime} </h3> </Col>
-           <Col> <Button onClick={this.editEvent} variant="outline-secondary"> Edit Event</Button> </Col>
-           <Col> <Button variant="outline-secondary"> Delete Event </Button> </Col>
+           <Col> <Button value={events.id} onClick={this.editEvent} variant="outline-secondary"> Edit Event</Button> </Col>
+           <Col> <Button value={events.id} variant="outline-secondary"> Delete Event </Button> </Col>
          </Row>
       </ListGroup.Item>
     );
