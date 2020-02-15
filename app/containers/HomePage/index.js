@@ -28,6 +28,7 @@ class HomePage extends React.Component {
       },
       events: [],
       editEvent: false,
+      deleteEvent: false,
     };
     this.toToday = this.toToday.bind(this);
     this.moveBack=this.moveBack.bind(this);
@@ -37,6 +38,9 @@ class HomePage extends React.Component {
     this.initEvent=this.initEvent.bind(this);
     this.cancelEdit=this.cancelEdit.bind(this);
     this.confirmChange=this.confirmChange.bind(this);
+    this.confirmDelete=this.confirmDelete.bind(this);
+    this.cancelDelete=this.cancelDelete.bind(this);
+    this.actualDelete=this.actualDelete.bind(this);
   }
 
   toToday() {
@@ -161,13 +165,51 @@ class HomePage extends React.Component {
     });
   }
 
+  confirmDelete() {
+    const value = event.target.value;
+    const curEvent = this.state.events.filter(eventObject => eventObject.id == value)[0];
+    this.setState(function(state){
+      const toDelete = {
+        id: value,
+        title: curEvent.title,
+        desc: curEvent.desc,
+        startDate: curEvent.startDate,
+        startTime: curEvent.startTime,
+        endDate: curEvent.endDate,
+        endTime: curEvent.endTime,
+      };
+      console.log(toDelete);
+      return {
+        deleteEvent: true,
+        eventObject: toDelete,
+      }
+    });
+  }
+
+  cancelDelete() {
+    this.setState({deleteEvent: false});
+  }
+
+  actualDelete(e) {
+    e.preventDefault();
+    this.setState(function(state){
+      const updatedEvents = this.state.events.filter((eventObject) => eventObject.id != this.state.eventObject.id);
+      console.log(updatedEvents);
+      return {
+        events: updatedEvents,
+        deleteEvent: false,
+      };
+    });
+  }
+
   render(){
     return (
       <div>
         <Header date={this.state.date} toToday={this.toToday} moveBack={this.moveBack} moveForward={this.moveForward}
            modifyEvent={this.modifyEvent} createEvent={this.createEvent}/>
         <Calendar events={this.state.events} editEvent={this.state.editEvent} newEvent={this.state.eventObject}
-           modifyEvent={this.modifyEvent} initEvent={this.initEvent} cancelEdit={this.cancelEdit} confirmChange={this.confirmChange}/>
+           modifyEvent={this.modifyEvent} initEvent={this.initEvent} cancelEdit={this.cancelEdit} confirmChange={this.confirmChange}
+           deleteEvent={this.state.deleteEvent} confirmDelete={this.confirmDelete} cancelDelete={this.cancelDelete} actualDelete={this.actualDelete}/>
       </div>
     );
   }

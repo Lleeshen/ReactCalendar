@@ -65,32 +65,32 @@ class Header extends React.Component {
         <Modal show={this.state.createEvent} onHide={this.cancelEvent}>
           <Modal.Header closeButton>
             <Modal.Title>Create Event</Modal.Title>
-            <Modal.Body>
-              <Form onSubmit={this.addEvent}>
-                <Form.Group controlId="EventTitle">
-                  <Form.Label>Event Title</Form.Label>
-                  <Form.Control type="text" name="title" placeholder="Title" onChange={this.changeEvent}/>
-                </Form.Group>
-                <Form.Group controlId="EventDescription">
-                  <Form.Label>Event Description</Form.Label>
-                  <Form.Control type="text" name="desc" placeholder="Description" onChange={this.changeEvent}/>
-                </Form.Group>
-                <Form.Group controlId="EventStartTime">
-                  <Form.Label>Start time</Form.Label>
-                  <Form.Control type="date" name="startDate" onChange={this.changeEvent}/>
-                  <br />
-                  <Form.Control type="time" name="startTime" onChange={this.changeEvent}/>
-                </Form.Group>
-                <Form.Group controlId="EventEndTime">
-                  <Form.Label>End time</Form.Label>
-                  <Form.Control type="date" name="endDate" onChange={this.changeEvent}/>
-                  <br />
-                  <Form.Control type="time" name="endTime" onChange={this.changeEvent}/>
-                </Form.Group>
-                <Button type="submit" variant="outline-primary">Create Event</Button>
-              </Form>
-            </Modal.Body>
           </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={this.addEvent}>
+              <Form.Group controlId="EventTitle">
+                <Form.Label>Event Title</Form.Label>
+                <Form.Control type="text" name="title" placeholder="Title" onChange={this.changeEvent}/>
+              </Form.Group>
+              <Form.Group controlId="EventDescription">
+                <Form.Label>Event Description</Form.Label>
+                <Form.Control type="text" name="desc" placeholder="Description" onChange={this.changeEvent}/>
+              </Form.Group>
+              <Form.Group controlId="EventStartTime">
+                <Form.Label>Start time</Form.Label>
+                <Form.Control type="date" name="startDate" onChange={this.changeEvent}/>
+                <br />
+                <Form.Control type="time" name="startTime" onChange={this.changeEvent}/>
+              </Form.Group>
+              <Form.Group controlId="EventEndTime">
+                <Form.Label>End time</Form.Label>
+                <Form.Control type="date" name="endDate" onChange={this.changeEvent}/>
+                <br />
+                <Form.Control type="time" name="endTime" onChange={this.changeEvent}/>
+              </Form.Group>
+              <Button type="submit" variant="outline-primary">Create Event</Button>
+            </Form>
+          </Modal.Body>
         </Modal>
       </div>
     );
